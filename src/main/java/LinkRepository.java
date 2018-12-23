@@ -37,13 +37,15 @@ public class LinkRepository {
 		return new Link(
 					document.get("_id").toString(),
 					document.getString("url"),
-					document.getString("description"));
+					document.getString("description"),
+					document.getString("postedBy"));
 	}
 	
 	public void saveLink(Link link) {
 		Document document = new Document();
 		document.append("url", link.getUrl());
 		document.append("description", link.getDescription());
+		document.append("postedBy", link.getUserId());
 		links.insertOne(document);
 	}
 }

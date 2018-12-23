@@ -1,5 +1,8 @@
 import static com.mongodb.client.model.Filters.eq;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -34,6 +37,14 @@ public class UserRepository {
 				user.getPassword());
 	}
 	
+	public List<User> getAllUsers() {
+		List<User> allUsers = new ArrayList<>();
+		for(Document document: users.find()){
+			allUsers.add(user(document));
+		}
+		return allUsers;
+	}
+
 	private User user(Document document) {
 		if(document == null) {
 			return null;
